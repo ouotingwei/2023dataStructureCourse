@@ -101,7 +101,7 @@ ListNode *GetPreNode(ListNode *head, ListNode *node){
 void ListTraverse(ListNode *head){
     ListNode *p = head;
     p = p -> next;
-    while(p){
+    while(p != NULL){
         cout<< p -> data;
         p = p -> next;
     }
