@@ -5,7 +5,6 @@ using namespace std;
 int inputSize();
 int inputLeaves();
 int FindMaxJump(int[], int n);
-//int scanCol(int[]);
 
 int main(int argc, char **argv){
     int maxJump = 0;
@@ -19,22 +18,39 @@ int main(int argc, char **argv){
             leaves2d[i][j] = inputLeaves();
         }
     }
-    
 
+    /*
     for(int i = 0; i < row; i++){
         int leaves[column] = {0};
+        int tempMaxJump = 0;
 
         for(int j = 0; j < column; j++){
             leaves[j] = leaves2d[i][j];
         }
 
-        int tempMaxJump = FindMaxJump(&leaves[0], column);
-        cout << " temp:"<< tempMaxJump << endl;
+        tempMaxJump = FindMaxJump(&leaves[0], column);
+        if(tempMaxJump > maxJump){
+            maxJump = tempMaxJump;
+        }
 
     }
+    */
 
-    
+    for(int i = 0; i < column; i++){
+        int leaves[row] = {0};
+        int tempMaxJump = 0;
 
+        for(int j = 0; j < row; j++){
+            leaves[j] = leaves2d[j][i];
+        }
+
+        tempMaxJump = FindMaxJump(&leaves[0], row);
+        if(tempMaxJump > maxJump){
+            maxJump = tempMaxJump;
+        }
+    }
+
+    //cout << maxJump << endl;
 
     return 0;
 }
@@ -139,11 +155,12 @@ int FindMaxJump(int *leaves, int n){
         flag = true;
         if(jump > maxjump){
             maxjump = jump;
-            cout <<"maxjump = "<<maxjump << endl;
         }
         
     }
-
+    cout << " "<< endl;
+    cout << maxjump << endl;
+    cout << " "<< endl;
     return maxjump;
 }
 

@@ -63,13 +63,6 @@ int FindMaxJump(int *leaves){
             cnt++;
         }
     }
-
-    /*
-    for(int i=0; i<maleCNT; i++){
-        cout << locationMale[i] << " ";
-    }
-    cout << endl;
-    */
     
     //from left to right
     for(int i=0; i<maleCNT; i++){
