@@ -18,8 +18,7 @@ int main(int argc, char **argv){
             leaves2d[i][j] = inputLeaves();
         }
     }
-
-    /*
+    
     for(int i = 0; i < row; i++){
         int leaves[column] = {0};
         int tempMaxJump = 0;
@@ -34,7 +33,6 @@ int main(int argc, char **argv){
         }
 
     }
-    */
 
     for(int i = 0; i < column; i++){
         int leaves[row] = {0};
