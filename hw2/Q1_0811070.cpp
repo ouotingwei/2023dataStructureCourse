@@ -14,10 +14,17 @@ int avail = 0;
 
 int scanNumberOfTerm();
 int scanPolynomial();
-void add();
+void inputPolynomial(int, int);
+int expCompare(int, int);
+void addPolynomial(int, int);
 
 int main(int argc, char **argv){
-    add();
+    int m, n;
+
+    m = scanNumberOfTerm();
+    n = scanNumberOfTerm();  
+    inputPolynomial(m, n); // input polynomial
+    addPolynomial(m, n);
 
     return 0;
 }
@@ -45,11 +52,73 @@ int scanPolynomial(){
         cout << "[W]input error !" << endl;
         return scanPolynomial();
     }
+
 }
 
-void add(){
-    int m = scanNumberOfTerm();
-    int n = scanNumberOfTerm();
+void inputPolynomial(int m, int n){
+    for(int i = 0; i < (m + n); i++){
+        terms[i].coef = scanPolynomial(); 
+        terms[i].expon = scanPolynomial();
+    }
 
-    
 }
+
+int expCompare(int expA, int expB) {
+    if(expA > expB){
+        return 1;
+    }else if(expA = expB){
+        return 0;
+    }else{
+        return -1;
+    }
+
+}
+
+void addPolynomial(int m, int n){
+    int startA = 0;
+    int endA = m - 1;
+    int startB = m;
+    int endB = m + n - 1;
+    avail = m + n;
+    int i = 0;
+
+    while( startA <= endA && startB <= endB ){
+        switch( expCompare(terms[startA].expon, terms[startB].expon) ){
+            case -1: // expA < expB
+                terms[avail].coef = terms[startB].coef;
+                terms[avail].expon = terms[startB].expon;
+                
+                startB ++;
+                avail++;
+
+                break;
+            case 0: // expA = expB
+                terms[avail].coef = terms[startA].coef + terms[startB].coef;
+                terms[avail].expon = terms[startB].expon;
+
+                startA ++;
+                startB ++;
+                avail++;
+
+                break;
+            case 1: // expA > expB
+                terms[avail].coef = terms[startA].coef;
+                terms[avail].expon = terms[startA].expon;
+
+                startA ++;
+                avail++;
+
+                break;
+        }
+
+    }
+
+    cout << endl;
+
+
+    for(int i = 0; i < avail; i++){
+        cout << terms[i].coef << " " << terms[i].expon << endl;
+    }
+
+}
+
