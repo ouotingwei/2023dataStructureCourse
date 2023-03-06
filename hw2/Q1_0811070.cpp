@@ -66,7 +66,7 @@ void inputPolynomial(int m, int n){
 int expCompare(int expA, int expB) {
     if(expA > expB){
         return 1;
-    }else if(expA = expB){
+    }else if(expA == expB){
         return 0;
     }else{
         return -1;
@@ -76,33 +76,56 @@ int expCompare(int expA, int expB) {
 
 void addPolynomial(int m, int n){
     int startA = 0;
-    int endA = m ;
+    int endA = m - 1 ;
     int startB = m;
-    int endB = m + n ;
+    int endB = m + n - 1;
     avail = m + n ;
     int i = 0;
+    bool flag = true;
 
     cout << "endA = " << endA << " endB = " << endB << endl;
 
-    while( startA <= endA && startB <= endB ){
-        int com = expCompare(terms[startA].expon, terms[startB].expon);
+    while( flag == true ){
+        if( startA == endA && startB == endB){
+            flag = false;
+        }
+
         cout << "startA = " <<startA << " startB = " << startB << " avail = " << avail << endl;
 
-        switch( com ){
+        switch( expCompare(terms[startA].expon, terms[startB].expon) ){
             case -1: // expA < expB
                 terms[avail].coef = terms[startB].coef;
                 terms[avail].expon = terms[startB].expon;
                 cout << "case -1" << endl;
-                startB ++;
+
+                if(startA == endA){
+                    startB ++;
+                }else if(startB == endB){
+                    startA ++;
+                }else{
+                    startB ++;
+                }
 
                 break;
             case 0: // expA = expB
-                terms[avail].coef = ( terms[startA].coef + terms[startB].coef );
-                terms[avail].expon = terms[startB].expon;
-                
 
-                startA ++;
-                startB ++;
+                if(startA != startB){
+                    terms[avail].coef = ( terms[startA].coef + terms[startB].coef );
+                    terms[avail].expon = terms[startB].expon;
+                }else{
+                    terms[avail].coef = terms[startB].coef ;
+                    terms[avail].expon = terms[startB].expon;
+                }
+                
+                if(startA == endA){
+                    startB ++;
+                }else if(startB == endB){
+                    startA ++;
+                }else{
+                    startA ++;
+                    startB ++;
+                }
+                
                 cout << "case 0" << endl;
 
                 break;
@@ -111,13 +134,19 @@ void addPolynomial(int m, int n){
                 terms[avail].expon = terms[startA].expon;
                 cout << "case 1" << endl;
 
-                startA ++;
+                if(startA == endA){
+                    startB ++;
+                }else if(startB == endB){
+                    startA ++;
+                }else{
+                    startA ++;
+                }
 
                 break;
         }
 
         avail ++;
-
+            
     }
 
     cout << endl;
