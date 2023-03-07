@@ -83,66 +83,74 @@ void addPolynomial(int m, int n){
     int i = 0;
     bool flag = true;
 
-    cout << "endA = " << endA << " endB = " << endB << endl;
+    //cout << "endA = " << endA << " endB = " << endB << endl;
 
     while( flag == true ){
-        if( startA == endA && startB == endB){
-            flag = false;
-        }
 
-        cout << "startA = " <<startA << " startB = " << startB << " avail = " << avail << endl;
+        //cout << "startA = " <<startA << " startB = " << startB << " avail = " << avail << endl;
 
         switch( expCompare(terms[startA].expon, terms[startB].expon) ){
             case -1: // expA < expB
-                terms[avail].coef = terms[startB].coef;
-                terms[avail].expon = terms[startB].expon;
-                cout << "case -1" << endl;
 
-                if(startA == endA){
-                    startB ++;
-                }else if(startB == endB){
+                if(startB > endB){
+                    terms[avail].coef = terms[startA].coef;
+                    terms[avail].expon = terms[startA].expon;
+
                     startA ++;
                 }else{
+                    terms[avail].coef = terms[startB].coef;
+                    terms[avail].expon = terms[startB].expon;
+
                     startB ++;
                 }
+                
+                //cout << "case -1" << " coef = " << terms[avail].coef << " expon = " << terms[avail].expon<< endl;
 
                 break;
             case 0: // expA = expB
-
-                if(startA != startB){
                     terms[avail].coef = ( terms[startA].coef + terms[startB].coef );
                     terms[avail].expon = terms[startB].expon;
-                }else{
-                    terms[avail].coef = terms[startB].coef ;
-                    terms[avail].expon = terms[startB].expon;
-                }
                 
-                if(startA == endA){
-                    startB ++;
-                }else if(startB == endB){
-                    startA ++;
-                }else{
-                    startA ++;
-                    startB ++;
-                }
+                startA ++;
+                startB ++;
                 
-                cout << "case 0" << endl;
+                //cout << "case 0" << " coef = " << terms[avail].coef << " expon = " << terms[avail].expon<< endl;
 
                 break;
             case 1: // expA > expB
+
+            if(startA > endA){
+                terms[avail].coef = terms[startB].coef;
+                terms[avail].expon = terms[startB].expon;
+
+                startB ++;
+            }else{
                 terms[avail].coef = terms[startA].coef;
                 terms[avail].expon = terms[startA].expon;
-                cout << "case 1" << endl;
 
-                if(startA == endA){
-                    startB ++;
-                }else if(startB == endB){
-                    startA ++;
-                }else{
-                    startA ++;
-                }
+                startA ++;
+            }
+                
+                //cout << "case 1" << " coef = " << terms[avail].coef << " expon = " << terms[avail].expon <<endl;
 
                 break;
+        }
+
+        if( startA > endA && startB > endB){
+            flag = false;
+        }else if(m == n == 1){  //if m == n == 1
+            
+            if(terms[avail].coef == terms[0].coef){
+                avail ++;
+                terms[avail].coef = terms[m].coef;
+                terms[avail].expon = terms[m].expon;
+            }else{
+                avail ++;
+                terms[avail].coef = terms[0].coef;
+                terms[avail].expon = terms[0].expon;
+            }
+
+            flag = false;
         }
 
         avail ++;
