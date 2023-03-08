@@ -159,7 +159,6 @@ void addPolynomial(int m, int n){
 
     cout << endl;
 
-
     for(int i = (m + n); i < avail; i++){
         cout << terms[i].coef << " " << terms[i].expon << endl;
     }
