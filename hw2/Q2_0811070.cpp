@@ -9,6 +9,7 @@ typedef struct{
 
 }polinomial;
 
+
 polinomial terms[MAX_TERMS];
 int avail = 0;
 
