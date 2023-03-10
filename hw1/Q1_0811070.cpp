@@ -1,3 +1,4 @@
+/*data structure hw1-1 by tingweiou 0811070 */
 #include<iostream>
 
 using namespace std;

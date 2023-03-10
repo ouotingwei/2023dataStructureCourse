@@ -1,3 +1,4 @@
+/* data structure hw2-2 by tingweiou 0811070 */
 #include<iostream>
 #define MAX_TERMS 100
 
