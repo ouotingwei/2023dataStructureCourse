@@ -90,25 +90,31 @@ void mulPolynomial(int m, int n){
         for(int j = startB; j <= endB; j++){
             terms[avail].coef = ( terms[i].coef * terms[j].coef );
             terms[avail].expon = ( terms[i].expon + terms[j].expon );
-
             avail ++;
         }
     }
 
     //add terms
-    mulEnd = avail;
-    while(flag == true){
-        for(int i = (m + n); i < mulStart; i++){
-
-        }
+    Start = avail;
+    int exponCNT = terms[m + n].expon;
+    while(exponCNT >= 0){
+	for(int i = (m + n); i < avail; i++){
+	   	if(terms[i].expon == exponCNT){
+			terms[Start].coef = terms[Start].coef + terms[i].coef;
+			terms[Start].expon = exponCNT;
+			flag = false;
+		}
+	}
+	if( flag == false){
+		Start ++;
+		flag = true;
+	}
+	exponCNT --;
     }
         
-    /*
     cout << endl;
-
-    for(int i = (m + n); i <= avail; i++){
+    for(int i = avail; i < Start; i++){
         cout << terms[i].coef << " " << terms[i].expon << endl;
     }
-    */
-
+   
 }
