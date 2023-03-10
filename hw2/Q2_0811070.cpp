@@ -9,7 +9,6 @@ typedef struct{
 
 }polinomial;
 
-
 polinomial terms[MAX_TERMS];
 int avail = 0;
 
@@ -81,20 +80,35 @@ void mulPolynomial(int m, int n){
     int startB = m;
     int endB = m + n - 1;
     avail = m + n ;
-    int i = 0;
     bool flag = true;
+    int Start = 0;
 
     //cout << "endA = " << endA << " endB = " << endB << endl;
 
-    while(flag == true){
-        
+    //multiple
+    for(int i = startA; i <= endA; i++){
+        for(int j = startB; j <= endB; j++){
+            terms[avail].coef = ( terms[i].coef * terms[j].coef );
+            terms[avail].expon = ( terms[i].expon + terms[j].expon );
+
+            avail ++;
+        }
     }
 
+    //add terms
+    mulEnd = avail;
+    while(flag == true){
+        for(int i = (m + n); i < mulStart; i++){
+
+        }
+    }
+        
+    /*
     cout << endl;
 
-    for(int i = (m + n); i < avail; i++){
+    for(int i = (m + n); i <= avail; i++){
         cout << terms[i].coef << " " << terms[i].expon << endl;
     }
+    */
 
 }
-
