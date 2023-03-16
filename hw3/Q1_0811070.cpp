@@ -1,24 +1,23 @@
 /*Data Structure HW3-1 by TingweiOu 0811070*/
 #include<iostream>
+#define MAX_ITEM 100
 
 using namespace std;
-
-int MAX_ITEM = 0;  //MAX_ITEM = Number Of Days
 
 typedef struct{
 	int Item[MAX_ITEM];
 	int Top = -1;
 }stack;
 
-int isFull(stack *s);
-int ismpty(stack *s);
-int pop(stack *s, int *x);
-int push(stack *s, int *x);
+int isFull(stack *);
+int ismpty(stack *);
+int pop(stack *, int *);
+int push(stack *, int );
 int inputCheckN();
 
 int main(){
-	MAX_ITEM = inputCheckN();
 	stack stk;
+	push(&stk, 11);
 	
 	return 0;
 }
@@ -49,7 +48,7 @@ int pop(stack *s, int *x){
 	return true;
 }
 
-int push(stack *s, int *x){
+int push(stack *s, int x){
 	if(isFull(s) == true){
 		return false;
 	}
