@@ -14,8 +14,10 @@ int ismpty(stack *);
 int pop(stack *, int *);
 int push(stack *, int );
 int inputCheckN();
+int N = 0;
 
 int main(){
+	N = inputCheckN();
 	stack stk;
 	push(&stk, 11);
 	
