@@ -10,22 +10,43 @@ typedef struct{
 }stack;
 
 int isFull(stack *);
-int ismpty(stack *);
-int pop(stack *, int *);
+int isEmpty(stack *);
+int pop(stack *);
 int push(stack *, int );
 int inputCheckN();
-int N = 0;
+int inputCheckPoints();
 
 int main(){
-	N = inputCheckN();
 	stack stk;
-	push(&stk, 11);
+	int Points = 0;
+	int N = inputCheckN();
+	int outPut[N] = {0};
+
+	push(&stk, inputCheckPoints());
+	outPut[0] = 1;
+	int i = 1;
+	while(i < N){
+		if(isEmpty(&stk) && stk.Item[stk.Top] <= Points){
+			pop(&stk);
+		}else{
+			Points = inputCheckPoints();
+			push(&stk, Points);
+			outPut[i] = i - stk.Top + 1;
+			i++;
+		}
+	}
+
+	cout << endl;
+	for(int i = 0; i < N; i++){
+		cout << outPut[i] << " ";
+	}
+	cout << endl;
 	
 	return 0;
 }
 
 int isFull(stack *s){
-	if(s -> Top == MAX_ITEM-1 ){
+	if(s -> Top == MAX_ITEM - 1){
 		return false;
 	}else{
 		return true;
@@ -40,14 +61,14 @@ int isEmpty(stack *s){
 	}
 }
 
-int pop(stack *s, int *x){
+int pop(stack *s){
 	if(isEmpty(s) == true){
 		return false;
 	}
 	
-	*x = s -> Item[s -> Top];
+	int x = s -> Item[s -> Top];
 	s -> Top--;
-	return true;
+	return x;
 }
 
 int push(stack *s, int x){
@@ -65,6 +86,16 @@ int inputCheckN(){
 	int input = 0;
 	cin >> input;
 	if(input > 0 && input <= 100){
+		return input;
+	}else{
+		return false;
+	}
+}
+
+int inputCheckPoints(){
+	int input = 0;
+	cin >> input;
+	if(input > 0 && input <= 1000){
 		return input;
 	}else{
 		return false;
