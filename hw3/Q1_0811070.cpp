@@ -1,8 +1,8 @@
 /*Data Structure HW3-1 by TingweiOu 0811070*/
 #include<iostream>
-#define MAX_ITEM 100
 
 using namespace std;
+#define MAX_ITEM 5
 
 typedef struct{
 	int Item[MAX_ITEM];
@@ -16,23 +16,38 @@ int push(stack *, int );
 int inputCheckN();
 int inputCheckPoints();
 
+
 int main(){
 	stack stk;
 	int Points = 0;
 	int N = inputCheckN();
 	int outPut[N] = {0};
 
-	push(&stk, inputCheckPoints());
-	outPut[0] = 1;
-	int i = 1;
-	while(i < N){
-		if(isEmpty(&stk) && stk.Item[stk.Top] <= Points){
+	int outPutCNT = 0;
+
+	for(int i = 0; i < N; i++){
+		outPut[i] = inputCheckPoints();
+	}
+
+	for(int i = 0; i < N; i++){
+		cout << outPut[i] << " ";
+	}
+	cout << endl;
+	
+	for(int i = 0; i < N; i++){
+		cout << stk.Top << endl;
+		if(stk.Top != -1 && stk.Item[stk.Top] <= outPut[outPutCNT]){
 			pop(&stk);
+		}else if(stk.Top != -1 && stk.Item[stk.Top] > outPut[outPutCNT]){
+			outPut[outPutCNT] = outPutCNT - stk.Top;
+			cout << "case 2 : " << outPut[outPutCNT] << endl;
+			push(&stk, outPut[outPutCNT]);
+			outPutCNT++;
 		}else{
-			Points = inputCheckPoints();
-			push(&stk, Points);
-			outPut[i] = i - stk.Top + 1;
-			i++;
+			outPut[outPutCNT] = outPutCNT - stk.Top;
+			cout << "case 3 : " << outPut[outPutCNT] << endl;
+			push(&stk, outPut[outPutCNT]);
+			outPutCNT++;
 		}
 	}
 
@@ -74,11 +89,12 @@ int pop(stack *s){
 int push(stack *s, int x){
 	if(isFull(s) == true){
 		return false;
+		
 	}
-	
-	s -> Top = s -> Top + 1;
+
+	s -> Top++;
 	s -> Item[s -> Top] = x;
-	
+
 	return true;
 }
 

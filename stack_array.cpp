@@ -40,11 +40,11 @@ int main(){
 }
 
 int push(Stack *s, int x){
-    if(IsFull(s)){
+    if(IsFull(s) == true){
         return false;
     }
 
-    s -> Top = s -> Top + 1;
+    s -> Top++;
     s -> Item[s -> Top] = x;
     return true;
 }
