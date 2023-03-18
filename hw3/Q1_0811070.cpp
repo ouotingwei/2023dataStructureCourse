@@ -1,8 +1,8 @@
 /*Data Structure HW3-1 by TingweiOu 0811070*/
 #include<iostream>
+#define MAX_ITEM 100
 
 using namespace std;
-#define MAX_ITEM 5
 
 typedef struct{
 	int Item[MAX_ITEM];
@@ -12,7 +12,7 @@ typedef struct{
 int isFull(stack *);
 int isEmpty(stack *);
 int pop(stack *);
-int push(stack *, int );
+int push(stack *, int);
 int inputCheckN();
 int inputCheckPoints();
 
@@ -62,17 +62,17 @@ int main(){
 
 int isFull(stack *s){
 	if(s -> Top == MAX_ITEM - 1){
-		return false;
-	}else{
 		return true;
+	}else{
+		return false;
 	}
 }
 
 int isEmpty(stack *s){
 	if(s -> Top == -1){
-		return false;
-	}else{
 		return true;
+	}else{
+		return false;
 	}
 }
 
@@ -89,7 +89,6 @@ int pop(stack *s){
 int push(stack *s, int x){
 	if(isFull(s) == true){
 		return false;
-		
 	}
 
 	s -> Top++;
