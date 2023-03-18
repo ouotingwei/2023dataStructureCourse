@@ -1,5 +1,5 @@
 #include<iostream>
-# define MAX_ITEM 100
+#define MAX_ITEM 3
 
 using namespace std;
 
@@ -9,9 +9,9 @@ typedef struct{
 }stack;
 
 int isEmpty(stack *);
-int isFull(stack *);
+int isfull(stack *);
 int pop(stack *);
-int push(stack *, int);
+int push(stack *, int x);
 
 int main(){
     stack stk;
@@ -19,14 +19,13 @@ int main(){
     push(&stk, 2);
     push(&stk, 3);
 
-    for (int i = 0; i < 3; i++){ 
-        cout  << "push to stack : " << stk.Item[i] << endl;  
+    for(int i = 0; i < MAX_ITEM; i++){
+        cout << "push : " << stk.Item[i] << endl;
     }
 
-    for (int i = 0; i < 3; i++){ 
-        cout  << "pop from stack : " << pop(&stk) << endl;  
+    for(int i = 0; i < MAX_ITEM; i++){
+        cout << "pop : " << pop(&stk) << endl;
     }
-
 
 
     return 0;
@@ -41,7 +40,7 @@ int isEmpty(stack *s){
 }
 
 int isFull(stack *s){
-    if( s -> Top == MAX_ITEM - 1){
+    if(s -> Top == MAX_ITEM - 1){
         return true;
     }else{
         return false;
@@ -63,7 +62,7 @@ int push(stack *s, int x){
     if(isFull(s) == true){
         return false;
     }
-    
+
     s -> Top++;
     s -> Item[s -> Top] = x;
 

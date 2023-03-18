@@ -19,42 +19,39 @@ int inputCheckPoints();
 
 int main(){
 	stack stk;
-	int Points = 0;
 	int N = inputCheckN();
 	int outPut[N] = {0};
 
-	int outPutCNT = 0;
-
+	//scan input data
+	
 	for(int i = 0; i < N; i++){
 		outPut[i] = inputCheckPoints();
 	}
 
+	int CNT = 0;
 	for(int i = 0; i < N; i++){
-		cout << outPut[i] << " ";
-	}
-	cout << endl;
-	
-	for(int i = 0; i < N; i++){
-		cout << stk.Top << endl;
-		if(stk.Top != -1 && stk.Item[stk.Top] <= outPut[outPutCNT]){
-			pop(&stk);
-		}else if(stk.Top != -1 && stk.Item[stk.Top] > outPut[outPutCNT]){
-			outPut[outPutCNT] = outPutCNT - stk.Top;
-			cout << "case 2 : " << outPut[outPutCNT] << endl;
-			push(&stk, outPut[outPutCNT]);
-			outPutCNT++;
+		if(isEmpty(&stk) == false && stk.Top <= outPut[CNT]){
+			cout << "[case 1]" << "stk.Top : " << stk.Top << " CNT : "<< CNT <<endl;
+			pop(&stk); // !
+		}else if(isEmpty(&stk) == true){
+			cout << "[case 2]" << "stk.Top : " << stk.Top << " CNT : "<< CNT <<endl;
+			outPut[CNT] = CNT - stk.Top;
+			push(&stk, outPut[CNT]);
+			CNT++;
 		}else{
-			outPut[outPutCNT] = outPutCNT - stk.Top;
-			cout << "case 3 : " << outPut[outPutCNT] << endl;
-			push(&stk, outPut[outPutCNT]);
-			outPutCNT++;
+			cout << "[case 3]" << "stk.Top : " << stk.Top << " CNT : "<< CNT <<endl;
+			push(&stk, outPut[CNT]);
+			outPut[CNT] = CNT - stk.Top;
+			CNT ++;
 		}
 	}
 
 	cout << endl;
+	
 	for(int i = 0; i < N; i++){
 		cout << outPut[i] << " ";
 	}
+
 	cout << endl;
 	
 	return 0;
@@ -83,6 +80,7 @@ int pop(stack *s){
 	
 	int x = s -> Item[s -> Top];
 	s -> Top--;
+
 	return x;
 }
 
