@@ -32,24 +32,32 @@ int** vomitAndCrawl(int rows, int cols, Snake* head) {
     for(int i = 0; i < rows; i++){
         for(int j = 0; j < cols; j++){
             terr[i][j] = -1;
+            //cout << terr[i][j] << " ";
         }
+        //cout << endl;
     }
 
     while(1){
         // determine the boundary
-        if(now_row == rows - 1 && now_col == 0){
-            /* touch boundary 1*/
-            direction_cnt ++;
-        }else if(now_row == rows - 1 && now_col == cols - 1){
-            /* touch boundary 2*/
-            direction_cnt ++;
-        }else if(now_row == 0 && now_col == cols - 1){
-            /* touch boundary 3*/
-            direction_cnt ++;
-        }else if(terr[now_row + now_row_dir][now_col + now_col_dir] != -1){
-            /* touch snack*/
-            direction_cnt ++;
-        }else{}
+        if(rows == 1){
+            /*only one rows*/
+            direction_cnt = 0;
+
+        }else{
+            if(now_row == rows - 1 && now_col == 0){
+                /* touch boundary 1*/
+                direction_cnt ++;
+            }else if(now_row == rows - 1 && now_col == cols - 1){
+                /* touch boundary 2*/
+                direction_cnt ++;
+            }else if(now_row == 0 && now_col == cols - 1){
+                /* touch boundary 3*/
+                direction_cnt ++;
+            }else if(terr[now_row + now_row_dir][now_col + now_col_dir] != -1){
+                /* touch snack*/
+                direction_cnt ++;
+            }else{}
+        }
 
         // assign values to the matrix
         terr[now_row][now_col] = head -> ratWeight;
