@@ -39,49 +39,45 @@ int** vomitAndCrawl(int rows, int cols, Snake* head) {
         // determine the boundary
         if(now_row == rows - 1 && now_col == 0){
             /* touch boundary 1*/
-            cout << "touch 1"<<endl;
             direction_cnt ++;
         }else if(now_row == rows - 1 && now_col == cols - 1){
             /* touch boundary 2*/
-            cout << "touch 2"<<endl;
             direction_cnt ++;
         }else if(now_row == 0 && now_col == cols - 1){
             /* touch boundary 3*/
-            cout << "touch 3"<<endl;
             direction_cnt ++;
         }else if(terr[now_row + now_row_dir][now_col + now_col_dir] != -1){
             /* touch snack*/
-            cout << "touch 4"<<endl;
             direction_cnt ++;
         }else{}
 
         // assign values to the matrix
         terr[now_row][now_col] = head -> ratWeight;
 
-        cout << now_row << " " << now_col << endl;
+        //cout << now_row << " " << now_col << " " << head -> ratWeight << endl;
         head = head -> nextRat;
+
         if(head == nullptr){
             break;
         }
 
         // determine the direction
         if(direction_cnt % 4 == RIGHT){
-            now_col_dir = 0;
-            now_row_dir = 1;
-        }else if (direction_cnt % 4 == DOWN){
             now_col_dir = 1;
             now_row_dir = 0;
-        }else if(direction_cnt % 4 == LEFT){
+        }else if (direction_cnt % 4 == DOWN){
             now_col_dir = 0;
-            now_row_dir = -1;
-        }else{
+            now_row_dir = 1;
+        }else if(direction_cnt % 4 == LEFT){
             now_col_dir = -1;
             now_row_dir = 0;
+        }else{
+            now_col_dir = 0;
+            now_row_dir = -1;
         }
 
         now_col += now_col_dir;
         now_row += now_row_dir;
-
     }
 
     return terr;
