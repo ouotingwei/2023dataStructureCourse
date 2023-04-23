@@ -2,7 +2,7 @@
 
 using namespace std;
 
-typrdef struct tagTNode
+typedef struct tagTNode
 {
     struct tagTNode *left_c;    //point to left subnode
     char data;                  //data
@@ -18,9 +18,15 @@ int main(){
     TNode *myTree;
     myTree = CreateBinaryTree();
 
-    cout << "PreOrder : " << PreOrder(myTree) << endl;
-    cout << "InOrder : " << InOrder(myTree) << endl;
-    cout << "PostOrder : " << PostOrder(myTree) << endl;
+    cout << "PreOrder : ";
+    PreOrder(myTree);
+    cout << endl;
+    cout << "InOrder : ";
+    InOrder(myTree);
+    cout << endl;
+    cout << "PostOrder : ";
+    PostOrder(myTree);
+    cout << endl;
 
     return 0;
 }
@@ -46,7 +52,7 @@ void PreOrder(TNode *p)
     if(p != NULL){
         cout << p -> data;
         PreOrder(p -> left_c);
-        PreOrder(p -> rdight_c)
+        PreOrder(p -> right_c);
     }
 }
 
