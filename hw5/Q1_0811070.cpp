@@ -5,7 +5,6 @@
 using namespace std;
 
 int Round = 0;
-int inputTreeMember[100] = {0};
 
 typedef struct treeNode
 {
@@ -109,7 +108,7 @@ void LevelOrder(treeNode *node)
     }
     queue<treeNode*> q;
     q.push(node);
-    while (!q.empty()) {
+    while (q.empty() != true) {
         int n = q.size();
         for (int i = 0; i < n; i++) {
             treeNode* node = q.front();
