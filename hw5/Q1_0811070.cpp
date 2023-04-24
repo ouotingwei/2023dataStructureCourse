@@ -104,10 +104,24 @@ treeNode *input()
 void LevelOrder(treeNode *node)
 {
     // TODO
-    if( node != nullptr){
-        cout << node -> data;
-        LevelOrder( node -> left);
-        LevelOrder( node -> right);
+    if (node == NULL) {
+        return;
+    }
+    queue<treeNode*> q;
+    q.push(node);
+    while (!q.empty()) {
+        int n = q.size();
+        for (int i = 0; i < n; i++) {
+            treeNode* node = q.front();
+            q.pop();
+            cout << node -> data;
+            if (node->left != NULL) {
+                q.push(node->left);
+            }
+            if (node->right != NULL) {
+                q.push(node->right);
+            }
+        }
     }
 }
 
