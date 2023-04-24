@@ -4,6 +4,9 @@
 
 using namespace std;
 
+int Round = 0;
+int inputTreeMember[100] = {0};
+
 typedef struct treeNode
 {
     int data;
@@ -42,6 +45,7 @@ treeNode *InsertLevelOrder(treeNode *node, int data)
             current->left = CreateNode(data);
             return current->left;
         }
+
         if (current->right != nullptr)
         {
             q.push(current->right);
@@ -67,11 +71,44 @@ treeNode *input()
     treeNode *red = InsertLevelOrder(root, 1);
     treeNode *black = InsertLevelOrder(root, 1);
     // TODO
+    cin >> Round;   //total amount = 2^k - 1
+    int inputdata;
+
+    for(int i = 1; i <= Round; i++){
+        if(i % 2 == 1){ //red first!
+            for(int j = 0; j < pow(2, i); j++){
+                cin >> inputdata;
+                treeNode *root = InsertLevelOrder(red, inputdata);
+            }
+
+            for(int j = 0; j < pow(2, i); j++){
+                cin >> inputdata;
+                treeNode *root = InsertLevelOrder(black, inputdata);
+            }
+        }else{
+            for(int j = 0; j < pow(2, i); j++){
+                cin >> inputdata;
+                treeNode *root = InsertLevelOrder(black, inputdata);
+            }
+
+            for(int j = 0; j < pow(2, i); j++){
+                cin >> inputdata;
+                treeNode *root = InsertLevelOrder(red, inputdata);
+            }
+        }
+    }
+
+    return root;
 }
 
 void LevelOrder(treeNode *node)
 {
     // TODO
+    if( node != nullptr){
+        cout << node -> data;
+        LevelOrder( node -> left);
+        LevelOrder( node -> right);
+    }
 }
 
 // DO NOT modify main function
