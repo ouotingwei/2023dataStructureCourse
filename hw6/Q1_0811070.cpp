@@ -1,100 +1,37 @@
 #include<iostream>
-#include<queue>
+#include<vector>
+
+#define MATRIX_ROW 500   //maximum value of nodes
+#define MATRIX_COLUMN 2
 
 using namespace std;
 
-typedef struct tagTNode{
-    struct tagTNode *left;
-    int data;
-    struct tagTNode *right;
-    struct tagTNode *father;
-    //struct tagTNode *father;
-}TNode;
+vector<vector<int>> BinaryTree(MATRIX_ROW, vector<int>(MATRIX_COLUMN));
+int amount = 0;
 
-TNode *CreateBinaryTreeRoot(int data)
+void input()
 {
-    TNode *ptr = new TNode;
-    if(data == -1){
-        return nullptr;
-    }   
-
-    ptr -> data = data;
-    ptr -> left = ptr -> right = nullptr;
-    ptr -> father = ptr;
-    return ptr;
-}
-
-TNode *InsertLevelOrder(TNode *node, int data)
-{
-    if(node == nullpter){
-        node = CreateBinaryTreeRoot();
-        return node;
-    }
-
-    queue<TNode *> q;
-    TNode *current = node;
-
-    while(current == True){
-        if(current -> left != nullptr){
-            q.push(current -> left);
-        }else{
-            current -> left = CreateBinaryTree();
-            return current -> left;
-        }
-
-        if(current -> right != nullptr){
-            q.push(current -> right);
-        }else{
-            current -> right = CreateBinaryTree();
-            return current -> right;
-        }
-
-        current = q.front();
-        q.pop();
-    }
-
-    return nullptr;
-}
-
-TNode *input()
-{
-    int amount = 0;
     cin >> amount;
 
     for(int i = 0; i < amount; i++){
-
+        int data = 0;
+        cin >> data;
+        BinaryTree[i][0] = data;
+        BinaryTree[i][1] = false;
     }
-
+    
+    return;
 }
 
-void LevelOrder(TNode * node)
+void Traverse()
 {
-    if(node == nullptr){
-        return;
-    }
-
-    queue<TNode *> q;
-    q.push(node);
-    while(q.empty() != true){
-        int n = q.size();
-
-        for(int i = 0; i < n; i++){
-            TNode *node = q.front();
-            q,pop();
-            cout << node -> data;
-            if(node -> left != nullptr){
-                q.push(node -> left);
-            }
-            if(node -> right != nullptr){
-                q.push(node -> right);
-            }
-        }
+    for(int i = 0; i < 10; i++){
+        cout<< BinaryTree[i][0] << " " << BinaryTree[i][1] << endl;
     }
 }
-
 
 int main(){
-
-
+    input();
+    Traverse();
     return 0;
 }
