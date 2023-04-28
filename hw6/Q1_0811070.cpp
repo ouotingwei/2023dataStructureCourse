@@ -17,7 +17,7 @@ void input()
         int data = 0;
         cin >> data;
         BinaryTree[i][0] = data;
-        BinaryTree[i][1] = false;
+        BinaryTree[i][1] = -1;  // if BinaryTree[i][1] == 0 -> have been traversed
     }
     
     return;
@@ -25,9 +25,10 @@ void input()
 
 void Traverse()
 {
-    for(int i = 0; i < 10; i++){
-        cout<< BinaryTree[i][0] << " " << BinaryTree[i][1] << endl;
-    }
+    int value, step, step_cnt = 0;
+    cin >> value >> step;
+    
+    
 }
 
 int main(){
