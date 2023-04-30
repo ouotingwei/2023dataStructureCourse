@@ -36,33 +36,42 @@ void input()
 
 void Traverse(int now_locate)
 {   
-    to_left_child(now_locate);
-    to_right_child(now_locate);
-    to_father(now_locate);
+    if(to_left_child(now_locate) != -1){
+        return Traverse(to_left_child(now_locate));
+    }
 
+    if(to_right_child(now_locate) != -1){
+
+    }
+
+    if(to_father(now_locate) != -1){
+
+    }
+    
     return;
 }
 
 int to_father(int now_locate)
 {
+    int father_locate = 0;
     if(now_locate % 2 == 0){
-        now_locate = (now_locate - 2) / 2;
-    }else{
-        now_locate = (now_locate - 1) / 2;
+        father_locate = (now_locate - 2) / 2;
+    }else if(){ 
+        father_locate = (now_locate - 1) / 2;
     }
-    return Traverse(now_locate);
+    return father_locate;
 }
 
 int to_left_child(int now_locate)
 {
     now_locate = (now_locate - 1) / 2;
-    return Traverse();
+    return now_locate;
 }
 
 int to_right_child(int now_locate)
 {
     now_locate = (now_locate - 2) / 2;
-    return Traverse();
+    return now_locate;
 }
 
 int main(){

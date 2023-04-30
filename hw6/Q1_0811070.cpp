@@ -25,7 +25,7 @@ void input()
         }
 
         BinaryTree[i][0] = data;
-        BinaryTree[i][1] = false;
+        BinaryTree[i][1] = -1;
     }
 
     cin >> start_num >> step;
@@ -40,12 +40,33 @@ void input()
     return;
 }
 
-int Traverse()
+int Traverse(int now_locate)
 {   
-
+    
 }
 
+int to_left_child(int now_locate)
+{   
+    now_locate = (now_locate - 1) / 2;
+    return now_locate;
+}
 
+int to_right_child(int now_locate)
+{
+    now_locate = (now_locate - 2) / 2;
+    return now_locate;
+}
+
+int to_father(int now_locate)
+{
+    if(now_locate % 2 == 0){
+        now_locate = (now_locate - 2) / 2;
+    }else if(now_locate % 2 == 1){
+        now_locate = (now_locate - 1) / 2;
+    }
+
+    return now_locate;
+}
 
 int main(){
     input();
