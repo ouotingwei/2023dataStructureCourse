@@ -1,4 +1,5 @@
 #include<iostream>
+#include<algorithm>
 
 #define MATRIX 500   //maximum value of nodes
 
@@ -11,16 +12,17 @@ int start_locate = 0;
 int step = 0;
 
 void input();
-void to_left_child(int , int );
-void to_right_child(int, int );
-void to_father(int, int );
+void to_left_child(int , int);
+void to_right_child(int, int);
+void to_father(int, int , int);
 void Traverse(int , int, int);
-int father_node(int , int );
-void arrive(int , int );
+int father_node(int , int);
+void output();
 
 int main(){
     input();
     Traverse(start_locate, start_locate, step);
+    output();
     return 0;
 }
 
@@ -53,40 +55,23 @@ void input()
 void to_left_child(int now_locate, int step_cnt)
 {   
     step_cnt --;
-    if(step == 0){
-        cout << "[]"<<BinaryTree[now_locate];
-        return;
-    }
-    
     int previous_locate = now_locate;
     now_locate = (2* now_locate) + 1;
-    arrive(step, now_locate);
     return Traverse(now_locate, previous_locate, step_cnt);
 }
 
 void to_right_child(int now_locate, int step_cnt)
 {   
     step_cnt --;
-    if(step == 0){
-        cout << "[]"<<BinaryTree[now_locate];
-        return;
-    }
-    
     int previous_locate = now_locate;
     now_locate = (2* now_locate) + 2;
     return Traverse(now_locate, previous_locate, step_cnt);
 }
 
-void to_father(int now_locate, int step_cnt)
+void to_father(int now_locate, int previous_locate, int step_cnt)
 {   
     step_cnt --;
-    if(step == 0){
-        cout << "[]"<<BinaryTree[now_locate];
-        return;
-    }
-
-    int previous_locate = now_locate;
-    if(now_locate == 0 && previous_locate ){
+    if(now_locate == 0 && previous_locate == 1){
         return to_right_child(now_locate, step_cnt);   //root
     }else if(now_locate == 0 && BinaryTree[2] == -1){  
         return to_left_child(now_locate,step_cnt);   //root
@@ -108,29 +93,29 @@ int father_node(int now_locate, int previous_locate)
     }
 }
 
-void arrive(int step, int now_locate)
-{
-    if(step == 0){
-        cout << BinaryTree[now_locate];
-    }
-}
-
 void Traverse(int now_locate, int previous_locate, int step_cnt)
 {   
-    cout << now_locate << endl;
     if(BinaryTree[(2* now_locate) + 1] > -1 && (2* now_locate) + 1 != previous_locate && step_cnt > 0){
-        //cout << ans_cnt << " " <<now_locate << endl;
         to_left_child(now_locate, step_cnt);
     }
 
     if(BinaryTree[(2* now_locate) + 2] > -1 && (2* now_locate) + 2 != previous_locate && step_cnt > 0){
-        //cout << ans_cnt << " " <<now_locate << endl;
         to_right_child(now_locate, step_cnt);
     }
 
     if(BinaryTree[father_node(now_locate, previous_locate)] > -1  && father_node(now_locate, previous_locate) != previous_locate && step_cnt > 0){
-        //cout << ans_cnt << " " <<now_locate << endl;
-        to_father(now_locate, step_cnt);
+        to_father(now_locate, previous_locate, step_cnt);
     }
-    ans_cnt++;
+    
+    if(step_cnt == 0){
+        Ans[ans_cnt] = BinaryTree[now_locate];
+        ans_cnt ++;
+    }
+}
+
+void output(){
+    sort(Ans, Ans + ans_cnt);
+    for(int i = ans_cnt - 1; i >= 0; i--){
+        cout << Ans[i];
+    }
 }
