@@ -31,8 +31,8 @@ void allcost(int **cost, int **distance, int n){
 }
 
 void output(int **distance, int Q){
-    int outa[Q] = {0};
-    int outb[Q] = {0};
+    int *outa = new int[Q];
+    int *outb = new int[Q];
     for(int i = 0; i < Q; i++){
         int a, b;
         cin >> a >> b;
